@@ -32,7 +32,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance           title            tags mask     isfloating   monitor */
-	{ "firefox",  NULL,               NULL,            1,              0,           1 },
 	{ NULL,       "whatsapp",         NULL,            1,              0,           1 },
 	{ NULL,       "nest",             NULL,            1,              0,           1 },
 	{ NULL,       "huridata",         NULL,            1,              0,           1 },
@@ -98,8 +97,9 @@ static Key keys[] = {
 	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	/* { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, */
+	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
 	/* { MODKEY,                       XK_space,  setlayout,      {0} }, */
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
