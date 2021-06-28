@@ -35,6 +35,7 @@ static const Rule rules[] = {
 	{ NULL,       "whatsapp",         NULL,            1,              0,           1 },
 	{ NULL,       "nest",             NULL,            1,              0,           1 },
 	{ NULL,       "huridata",         NULL,            1,              0,           1 },
+	{ NULL,       "calendar",         NULL,            2,              0,           1 },
 	{ NULL,       NULL,              "Helper-Window",  2,              0,           1 },
 };
 
