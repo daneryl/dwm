@@ -31,10 +31,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance           title            tags mask     isfloating   monitor */
+	/* class      instance            title           tags mask       isfloating   monitor    float x,y,w,h         floatborderpx*/
 	{ NULL,       "whatsapp",         NULL,            1,              0,           1 },
 	{ NULL,       "nest",             NULL,            1,              0,           1 },
 	{ NULL,       "huridata",         NULL,            1,              0,           1 },
+	{ NULL,       NULL,              "quick terminal", 1,              1,           0,        -1,-1,1300,1265,        5  },
 	{ NULL,       "calendar",         NULL,            2,              0,           1 },
 	{ NULL,       NULL,              "Helper-Window",  2,              0,           1 },
 };
@@ -46,7 +47,7 @@ static const MonitorRule monrules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.85; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.75; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -76,14 +77,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "10", NULL 
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *passmenucmd[]  = { "passmenu", "-l", "10", NULL };
 static const char *clipmenucmd[]  = { "clipmenu", NULL };
+static const char *quickterm[]  = { "quick_terminal", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = passmenucmd } },
-	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_f,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_v,      spawn,          {.v = clipmenucmd } },
-	{ MODKEY,                       XK_f,      spawn,          SHCMD("dmenu_focus_window.sh") },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost --increase 5; dwmblocks_signal.sh 10") },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost --decrease 5; dwmblocks_signal.sh 10") },
 	{ 0,                            XF86XK_AudioMute, spawn, SHCMD("pamixer --toggle-mute; dwmblocks_signal.sh 10") },
@@ -96,13 +97,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
+	{ MODKEY,                       XK_semicolon,  spawn,          {.v = quickterm } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
 	/* { MODKEY,                       XK_space,  setlayout,      {0} }, */
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_f,      togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
