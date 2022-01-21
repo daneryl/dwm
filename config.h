@@ -38,6 +38,7 @@ static const Rule rules[] = {
 	{ NULL,       NULL,              "quick terminal", 1,              1,           0,        -1,-1,1300,1265,        5  },
 	{ NULL,       "calendar",         NULL,            2,              0,           1 },
 	{ NULL,       NULL,              "Helper-Window",  2,              0,           1 },
+	{ NULL,       "fzfmenu",          NULL,            -1,             1,           -1,       -1,-1,500,400,        5  },
 };
 
 static const MonitorRule monrules[] = {
@@ -74,16 +75,15 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "10", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *passmenucmd[]  = { "passmenu", "-l", "10", NULL };
+static const char *launchermenu[] = { "launcher", NULL };
+static const char *passmenucmd[]  = { "fzfpassmenu", "--type", NULL };
 static const char *clipmenucmd[]  = { "clipmenu", NULL };
 static const char *quickterm[]  = { "quick_terminal", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = passmenucmd } },
-	{ MODKEY,                       XK_f,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_f,      spawn,          {.v = launchermenu } },
 	{ MODKEY|ShiftMask,             XK_v,      spawn,          {.v = clipmenucmd } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost --increase 5; dwmblocks_signal.sh 10") },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost --decrease 5; dwmblocks_signal.sh 10") },
@@ -130,7 +130,6 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
