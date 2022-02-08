@@ -77,12 +77,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "10", NULL };
 static const char *launchermenu[] = { "launcher", NULL };
-static const char *passmenucmd[]  = { "fzfpassmenu", "--type", NULL };
+static const char *passmenucmd[]  = { "fzfpassmenu", NULL };
+static const char *passmenucmdwithuser[]  = { "fzfpassmenu", "--with-user", NULL };
 static const char *clipmenucmd[]  = { "fzfclipmenu", NULL };
 static const char *quickterm[]  = { "quick_terminal", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmdwithuser } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY,                       XK_f,      spawn,          {.v = launchermenu } },
 	{ MODKEY,                       XK_v,      spawn,          {.v = clipmenucmd } },
