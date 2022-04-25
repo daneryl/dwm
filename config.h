@@ -19,12 +19,12 @@ static const char col_cyan[]        = "#282c34";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_blue, col_black, col_black },
+	[SchemeNorm] = { col_blue, col_black, col_gray },
 	[SchemeSel]  = { col_gray, col_cyan,  col_magenta},
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4" };
 
 static const Rule rules[] = {
 	/* xprop(1):
