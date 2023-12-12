@@ -9,6 +9,12 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 /* static const char *fonts[]          = { "monospace:size=12", "MesloLGM Nerd Font:size=12" }; */
 static const char *fonts[]          = { "MesloLGM Nerd Font:size=12" };
+/* static const char *fonts[] = { "JetBrainsMono Nerd Font:size=10:style=bold:antialias=true:autohint=true", */
+/*                                "Font Awesome 5 Free:size=20:style=bold:antialias=true:autohint=true", */
+/*                                "NotoEmoji Nerd Font:size=12:antialias=true:autohint=true", */
+/*                                "WeatherIcons:size=10.5:antialias=true:autohint=true", */
+/*                                "IcoMoon Free:size=9.5:antialias=true:autohint=true", */
+/* }; */
 static const char col_black[]       = "#282c34";
 static const char col_red[]         = "#E06C75";
 static const char col_green[]       = "#98C379";
@@ -34,7 +40,7 @@ static const Rule rules[] = {
 	/* class      instance            title           tags mask       isfloating   monitor    float x,y,w,h         floatborderpx*/
 	{ NULL,       "whatsapp",         NULL,            1,              0,           1 },
 	{ NULL,       "nest",             NULL,            1,              0,           1 },
-	{ NULL,       "huridata",         NULL,            1,              0,           1 },
+	{ NULL,       "huridata",         NULL,            2,              0,           0 },
 	{ NULL,       NULL,              "quick terminal", 1,              1,           0,        -1,-1,1300,1265,        5  },
 	{ NULL,       "calendar",         NULL,            2,              0,           1 },
 	{ NULL,       NULL,              "Helper-Window",  2,              0,           1 },
@@ -81,16 +87,18 @@ static const char *passmenucmd[]  = { "fzfpassmenu", NULL };
 static const char *passmenucmdwithuser[]  = { "fzfpassmenu", "--with-user", NULL };
 static const char *clipmenucmd[]  = { "fzfclipmenu", NULL };
 static const char *quickterm[]  = { "quick_terminal", NULL };
+/* static const char *backupterm[]  = { "xfce4-terminal", NULL }; */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passmenucmdwithuser } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = passmenucmd } },
 	{ MODKEY,                       XK_f,      spawn,          {.v = launchermenu } },
+	{ MODKEY,                       XK_F,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_v,      spawn,          {.v = clipmenucmd } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost --increase 5; dwmblocks_signal.sh 10") },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost --decrease 5; dwmblocks_signal.sh 10") },
-	{ 0,                            XF86XK_AudioMute, spawn, SHCMD("pamixer --toggle-mute; dwmblocks_signal.sh 10") },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, SHCMD("pamixer --allow-boost --increase 5; dwmblocks_signal 10") },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, SHCMD("pamixer --allow-boost --decrease 5; dwmblocks_signal 10") },
+	{ 0,                            XF86XK_AudioMute, spawn, SHCMD("pamixer --toggle-mute; dwmblocks_signal 10") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -101,6 +109,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
 	{ MODKEY,                       XK_semicolon,  spawn,          {.v = quickterm } },
+	{ MODKEY,                       XK_colon,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
