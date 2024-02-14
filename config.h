@@ -86,7 +86,8 @@ static const char *launchermenu[] = { "launcher", NULL };
 static const char *passmenucmd[]  = { "fzfpassmenu", NULL };
 static const char *passmenucmdwithuser[]  = { "fzfpassmenu", "--with-user", NULL };
 static const char *clipmenucmd[]  = { "fzfclipmenu", NULL };
-static const char *quickterm[]  = { "quick_terminal", NULL };
+static const char *main_terminal[]  = { "main_terminal", NULL };
+static const char *simple_terminal[]  = { "st", NULL };
 /* static const char *backupterm[]  = { "xfce4-terminal", NULL }; */
 
 static Key keys[] = {
@@ -108,8 +109,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
-	{ MODKEY,                       XK_semicolon,  spawn,          {.v = quickterm } },
-	{ MODKEY,                       XK_colon,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_semicolon,  spawn,      {.v = main_terminal } },
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = simple_terminal } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
